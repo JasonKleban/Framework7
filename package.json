@@ -51,6 +51,8 @@
   ],
   "dependencies": {
     "dom7": "^1.6.4",
+    "global": "^4.3.2",
+    "gulp-cli": "^1.4.0",
     "template7": "^1.2.5"
   },
   "devDependencies": {
@@ -69,11 +71,14 @@
     "gulp-open": "^2.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^2.6.0",
+    "gulp-typescript": "^3.2.2",
     "gulp-uglify": "^2.1.2",
     "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-typescript": "^0.8.1",
     "rollup-stream": "^1.19.0",
+    "ts-node": "^3.3.0",
     "typescript": "^2.4.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"

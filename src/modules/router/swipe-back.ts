@@ -1,4 +1,4 @@
-import * as $ from 'dom7';
+import $ from 'dom7';
 import History from '../../utils/history';
 import Support from '../../utils/support';
 import Device from '../../utils/device';

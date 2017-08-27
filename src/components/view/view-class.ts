@@ -1,4 +1,4 @@
-import * as $ from 'dom7';
+import $ from 'dom7';
 import Utils from '../../utils/utils';
 import Router from '../../modules/router/router';
 import Framework7Class from '../../utils/class';

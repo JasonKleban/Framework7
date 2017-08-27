@@ -4,7 +4,6 @@
 const gulp = require('gulp');
 const fs = require('fs');
 const rollup = require('rollup-stream');
-const buble = require('rollup-plugin-buble');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const replace = require('rollup-plugin-replace');
@@ -17,17 +16,21 @@ const rename = require('gulp-rename');
 const config = require('./config.js');
 const banner = require('./banner.js');
 
+const typescript = require('rollup-plugin-typescript');
+const ts = require('typescript');
+
 function es(components, cb) {
   const env = process.env.NODE_ENV || 'development';
   rollup({
-    entry: './src/framework7.js',
+    entry: './src/framework7.ts',
     plugins: [
       replace({
         'process.env.NODE_ENV': JSON.stringify(env), // or 'production'
         '//IMPORT_COMPONENTS': components.map(component => `import ${component.capitalized} from './components/${component.name}/${component.name}';`).join('\n'),
         '//INSTALL_COMPONENTS': components.map(component => `.use(${component.capitalized})`).join('\n  '),
       }),
-      buble(),
+      resolve({ jsnext: true }),
+      typescript({typescript: ts}),
     ],
     format: 'es',
     moduleName: 'Framework7',
@@ -50,7 +53,7 @@ function es(components, cb) {
 function umd(components, cb) {
   const env = process.env.NODE_ENV || 'development';
   rollup({
-    entry: './src/framework7.js',
+    entry: './src/framework7.ts',
     plugins: [
       replace({
         'process.env.NODE_ENV': JSON.stringify(env), // or 'production'
@@ -58,7 +61,7 @@ function umd(components, cb) {
         '//INSTALL_COMPONENTS': components.map(component => `.use(${component.capitalized})`).join('\n  '),
       }),
       resolve({ jsnext: true }),
-      buble(),
+      typescript({typescript: ts}),
     ],
     format: 'umd',
     moduleName: 'Framework7',
@@ -82,6 +85,7 @@ function umd(components, cb) {
       gulp.src('./dist/js/framework7.js')
         .pipe(sourcemaps.init())
         .pipe(uglify())
+        .on('error', function (err) { console.error(err.toString()); })
         .pipe(header(banner))
         .pipe(rename((filePath) => {
           /* eslint no-param-reassign: ["error", { "props": false }] */
@@ -106,7 +110,7 @@ function build(cb) {
         return char;
       }).join('');
     }).join('');
-    const jsFilePath = `./src/components/${name}/${name}.js`;
+    const jsFilePath = `./src/components/${name}/${name}.ts`;
     if (fs.existsSync(jsFilePath)) {
       components.push({ name, capitalized });
     }

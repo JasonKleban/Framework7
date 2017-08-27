@@ -1,4 +1,4 @@
-import * as $ from 'dom7';
+import $ from 'dom7';
 
 const History = {
   queue: [],

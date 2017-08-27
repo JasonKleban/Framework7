@@ -1,4 +1,4 @@
-import * as $ from 'dom7';
+import $ from 'dom7';
 import Utils from '../../utils/utils';
 import Framework7Class from '../../utils/class';
 import SwipePanel from './swipe-panel';

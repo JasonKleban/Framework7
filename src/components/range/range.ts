@@ -1,4 +1,4 @@
-import * as $ from 'dom7';
+import $ from 'dom7';
 import Range from './range-class';
 import Utils from '../../utils/utils';
 

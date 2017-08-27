@@ -1,4 +1,4 @@
-import * as $ from 'dom7';
+import $ from 'dom7';
 import Device from '../../utils/device';
 import Support from '../../utils/support';
 import ViewClass from '../../components/view/view-class';

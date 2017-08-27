@@ -108,7 +108,7 @@ declare namespace Dom7 {
 		/** Adds prefixed CSS transform property */
 		transform(CSSTransformString : string) : Dom7;
 		/** Set CSS transition-duration property to collection */
-		transition(transitionDuration : number) : Dom7;
+		transition(transitionDuration : number | string) : Dom7;
 
 		// EVENTS
 		/** Add event handler function to one or more events to the selected elements */
@@ -124,9 +124,9 @@ declare namespace Dom7 {
 		/** Remove live/delegated event handler */
 		off(eventName : string, delegatedTarget : string, handler : (event : Event) => void, useCapture? : boolean) : Dom7;
 		/** Execute all handlers added to the matched elements for the specified event */
-		trigger(eventName : string, eventData : any) : Dom7;
+		trigger(eventName : string, eventData? : any) : Dom7;
 		/** Adds prefixed transitionEnd event handler to collection */
-		transitionEnd(callback : () => void, permanent : boolean) : Dom7;
+		transitionEnd(callback : () => void, permanent? : boolean) : Dom7;
 		/** Adds prefixed animationEnd event handler to collection */
 		animationEnd(callback : () => void) : Dom7;
 

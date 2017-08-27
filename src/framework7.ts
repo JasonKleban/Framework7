@@ -1,5 +1,5 @@
 import t7 from 'template7';
-import * as $ from 'dom7';
+import $ from 'dom7';
 
 // F7 Class
 import Framework7 from './components/app/app-class';
