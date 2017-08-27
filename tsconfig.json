@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "noEmit": true,
+    "downlevelIteration": true
+    // "strict": true
+    // "noImplicitAny": true,
+    // "strictNullChecks": true,
+    // "noImplicitThis": true,
+    // "alwaysStrict": true,
+  }
+}
