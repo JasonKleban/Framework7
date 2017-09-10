@@ -3,11 +3,6 @@
 
 const gulp = require('gulp');
 const fs = require('fs');
-const rollup = require('rollup-stream');
-const source = require('vinyl-source-stream');
-const buffer = require('vinyl-buffer');
-const replace = require('rollup-plugin-replace');
-const resolve = require('rollup-plugin-node-resolve');
 const header = require('gulp-header');
 const uglify = require('gulp-uglify');
 const sourcemaps = require('gulp-sourcemaps');
@@ -16,40 +11,19 @@ const rename = require('gulp-rename');
 const config = require('./config.js');
 const banner = require('./banner.js');
 
-const typescript = require('rollup-plugin-typescript');
-const ts = require('typescript');
+var typescript = require('gulp-tsc');
 
 function es(components, cb) {
   const env = process.env.NODE_ENV || 'development';
-  rollup({
-    entry: './src/framework7.ts',
-    plugins: [
-      replace({
-        'process.env.NODE_ENV': JSON.stringify(env), // or 'production'
-        '//IMPORT_COMPONENTS': components.map(component => `import ${component.capitalized} from './components/${component.name}/${component.name}';`).join('\n'),
-        '//INSTALL_COMPONENTS': components.map(component => `.use(${component.capitalized})`).join('\n  '),
-      }),
-      resolve({ jsnext: true }),
-      typescript({typescript: ts}),
-    ],
-    format: 'es',
-    moduleName: 'Framework7',
-    useStrict: true,
-    sourceMap: false,
-  })
-    .on('error', (err) => {
-      if (cb) cb();
-      console.log(err.toString());
-    })
-    .pipe(source('framework7.js', './src'))
+  gulp.src(['src/**/*.ts'])
+    .pipe(typescript())
     .pipe(buffer())
     .pipe(header(banner))
     .pipe(rename('framework7.module.js'))
     .pipe(gulp.dest(`./${env === 'development' ? 'build' : 'dist'}/js/`))
-    .on('end', () => {
-      if (cb) cb();
-    });
+    .on('end', () => cb && cb());
 }
+
 function umd(components, cb) {
   const env = process.env.NODE_ENV || 'development';
   rollup({
