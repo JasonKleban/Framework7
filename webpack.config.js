@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const config = require('./scripts/config.js')
+const DeclarationBundlerPlugin = require('declaration-bundler-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const components = () =>
@@ -24,6 +25,7 @@ module.exports = {
   output: {
     filename: './build/js/framework7.js'
   },
+  devtool: 'source-map',
   resolve: {
     // Add '.ts' and '.tsx' as a resolvable extension.
     extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
@@ -45,18 +47,21 @@ module.exports = {
         loader: 'ts-loader',
         options: {
           // disable type checker - we will use it in fork plugin
-          transpileOnly: true,
+          //transpileOnly: true,
           compilerOptions: {
             target: 'es5',
             module: 'commonjs',
-            noEmit: false,
-            outDir: './build/js'
+            noEmit: false
           }
         }
       }
     ]
   },
   plugins: [
+    new DeclarationBundlerPlugin({
+        moduleName:'Framework7',
+        out:'./build/js/framework7.d.ts',
+    })
     //new ForkTsCheckerWebpackPlugin()
   ]
 }
