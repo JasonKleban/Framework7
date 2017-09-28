@@ -1,9 +1,21 @@
-import $ from 'dom7';
+import * as $ from 'dom7';
 import Utils from '../../utils/utils';
 import Device from '../../utils/device';
 import Framework7Class from '../../utils/class';
 
 class Framework7 extends Framework7Class {
+
+  public static t7 : Template7.Template7 | undefined;
+  public static $ : Dom7.Dom7Static | undefined;
+
+  private routes;
+  private root;
+  private ls;
+  private rtl;
+  private theme;
+  private initialized;
+  private data;
+
   constructor(params) {
     super(params);
 
@@ -93,6 +105,6 @@ class Framework7 extends Framework7Class {
   }
 }
 
-Framework7.Class = Framework7Class;
+Framework7.Class = <any>Framework7Class;
 
 export default Framework7;

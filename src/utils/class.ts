@@ -1,13 +1,20 @@
 import Utils from './utils';
 
-class Framework7Class {
-  constructor(params = {}, parents = []) {
-    const self = this;
-    self.params = params;
+export type Params = {
+  on?: object,
+  routes?: object,
+  root?: EventTarget,
+  theme?: string,
+  init?: () => void,
+  data?: any
+}
 
-    // Events
-    self.eventsParents = parents;
-    self.eventsListeners = {};
+class Framework7Class {
+  private eventsListeners = {};
+  private modules = {};
+
+  constructor(public params : Params = {}, private eventsParents = []) {
+    const self = this;
 
     if (self.params && self.params.on) {
       Object.keys(self.params.on).forEach((eventName) => {

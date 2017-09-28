@@ -8,6 +8,7 @@
     "sourceMap": true,
     "declaration": true,
     "declarationDir": "./build/js/"
+    //"typeRoots": ["./types/"]
     // "strict": true
     // "noImplicitAny": true,
     // "strictNullChecks": true,
@@ -15,6 +16,7 @@
     // "alwaysStrict": true,
   },
   "include": [
-    "src"
+    "./types/",
+    "./src"
   ]
 }

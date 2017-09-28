@@ -1,5 +1,5 @@
-import t7 from 'template7';
-import $ from 'dom7';
+import * as t7 from 'template7';
+import * as $ from 'dom7';
 
 // F7 Class
 import Framework7 from './components/app/app-class';
@@ -25,13 +25,13 @@ import TouchRipple from './components/touch-ripple/touch-ripple';
 
 // Template7
 if (typeof t7 !== 'undefined') {
-  Framework7.prototype.t7 = t7;
+  (<any>Framework7.prototype).t7 = t7;
   if (!window.Template7) window.Template7 = t7;
 }
 
 // Dom7
 if (typeof $ !== 'undefined') {
-  Framework7.prototype.$ = $;
+  (<any>Framework7.prototype).$ = $;
   if (!window.Dom7) window.Dom7 = $;
 }
 
